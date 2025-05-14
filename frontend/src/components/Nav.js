@@ -5,6 +5,7 @@ import Ct from './Cs'
 import { Avatar, Menu, MenuItem } from "@mui/material";
 import {lightBlue} from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 const Nav = () => {
   let obj = useContext(Ct)
@@ -12,6 +13,7 @@ const Nav = () => {
   let [forsearch,updsearch]=useState("")
   const open = Boolean(anchorEl);
   let navigate=useNavigate()
+  let cart_length = Cookies.get('cartlength') ? Cookies.get('cartlength') : 0;
 
   const menuopen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,8 +58,8 @@ const Nav = () => {
         </div>
         <Link className='navanchor' to="/">Products <i className="fa-solid fa-shop"></i></Link>
         {obj.state.token === "" && <Link className='navanchor' to="/login">Signin <i className="fa-solid fa-arrow-right-to-bracket"></i></Link>}
-        {obj.state.token !== ""&& obj.state.role === "admin" && <Link className='navanchor' to="/add">AddProd <i class="fa-solid fa-cart-plus"></i></Link>}
-        {obj.state.token !== "" && <Link className='navanchor' to="/cart">Cart <i className="fa-solid fa-cart-shopping"></i> {obj.state.cartlength>0 &&<button className='cartlen'>{obj.state.cartlength}</button>}</Link>}
+        {obj.state.token !== ""&& obj.state.role === "admin" && <Link className='navanchor' to="/add">AddProd <i className="fa-solid fa-cart-plus"></i></Link>}
+        {obj.state.token !== "" && <Link className='navanchor' to="/cart">Cart <i className="fa-solid fa-cart-shopping"></i> {cart_length>0 &&<button className='cartlen'>{cart_length}</button>}</Link>}
         {obj.state.token !== "" && <Link className='navanchor' to="">orders <i className="fa-solid fa-arrow-right-from-bracket"></i></Link>}
         {obj.state.token !== "" && <div className='name' onClick={menuopen}><Avatar sx={{ bgcolor: lightBlue[900] }}>{obj.state.name[0].toUpperCase()}</Avatar></div>}
         <Menu anchorEl={anchorEl} open={open} onClose={menuclose}>

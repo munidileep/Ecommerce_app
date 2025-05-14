@@ -2,27 +2,29 @@ import React, { useContext, useEffect, useState } from 'react'
 import Ct from './Cs'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-
+import Cookies from 'js-cookie'
 
 
 function Km() {
   let obj = useContext(Ct)
   let navigate = useNavigate()
-
-  let [pobj, uprod] = useState(() => {
-    return JSON.parse(sessionStorage.getItem("proddet")) || {};
-  });
+  let refresh_pro = JSON.parse(sessionStorage.getItem("proddet")) || {};
+  let [pobj, uprod] = useState({})
+  const user = JSON.parse(Cookies.get('user'));
 
   useEffect(() => {
-    if (obj.state.proddet) {
-      uprod(obj.state.proddet);
-      sessionStorage.setItem("proddet", JSON.stringify(obj.state.proddet)); // Save in sessionStorage
+    if (user) {
+      uprod(refresh_pro);
+      obj.upd(user)
     }
-  }, [obj.state]);
+    else{
+      navigate("/login")
+    }
+  }, []);
 
   let addcart = (prodobj) => {
-    if (obj.state.token !== "") {
-      axios.post("http://localhost:5555/addcart", { "uid": obj.state._id, "pid": prodobj._id, "pimg": prodobj.pimg, "price": prodobj.price, "name": prodobj.name, "qty": 1, "desc": prodobj.desc, "cat": prodobj.cat }).then(() => {
+    if (user) {
+      axios.post("http://localhost:5555/addcart", { "uid": user._id, "pid": prodobj._id, "pimg": prodobj.pimg, "price": prodobj.price, "name": prodobj.name, "qty": 1, "desc": prodobj.desc, "cat": prodobj.cat },{headers:{Authorization:user.token}}).then(() => {
         navigate("/cart")
       })
     }

@@ -43,6 +43,17 @@ let login = async (req, res) => {
         res.json({ "message": "error in login" })
     }
 }
+
+let auth = async(req,res,next)=>{
+    try{
+        jwt.verify(req.headers.authorization, "key")
+        next()
+    }
+    catch(err){
+        res.json({message:"you are not authorized"})
+    }
+}
+
 let editprofile = async (req, res) => {
     try {
         await usermodel.findByIdAndUpdate({ _id: req.body._id }, req.body)
@@ -106,4 +117,4 @@ const verifyOtp = (req, res) => {
 };
 
 
-module.exports = { reg, login, editprofile, forgotpass, sendOtp, verifyOtp }
+module.exports = { reg, login, editprofile, forgotpass, sendOtp, verifyOtp, auth }

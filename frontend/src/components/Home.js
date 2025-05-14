@@ -8,31 +8,40 @@ import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Ct from './Cs';
 import { useNavigate } from "react-router-dom"
+import Cookies from 'js-cookie';
 
 const Home = () => {
   let obj = useContext(Ct)
   let[prod,uprod]=useState([])
   let navigate=useNavigate()
-  let shprod = prod.sort(() => Math.random() - 0.5);
+  let user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
   useEffect(()=>{
+    if(user){
+      obj.upd(user)
+    }
     fetchprod();
   },[])
 
   let fetchprod = ()=>{
     axios.get("http://localhost:5555/products").then((res)=>{
-      uprod(res.data)
+      uprod((res.data).sort(() => Math.random() - 0.5))
     })
   }
 
   let knowmore=(prodobj)=>{
-    obj.upd({"proddet":prodobj})
-    sessionStorage.setItem("proddet",JSON.stringify(prodobj)) // saved in the session storage bcoz for faster reloading
+    if(user){
+    // obj.upd({"proddet":prodobj})
+    sessionStorage.setItem("proddet",JSON.stringify(prodobj)) // saved in the session storage bcoz for reloading
     navigate("/Km")
+    }
+    else{
+      navigate("/login")
+    }
   }
 
   let addcart = (prodobj)=>{
     if(obj.state.token !==""){
-      axios.post("http://localhost:5555/addcart",{"uid":obj.state._id,"pid":prodobj._id,"pimg":prodobj.pimg,"price":prodobj.price,"name":prodobj.name,"qty":1,"desc":prodobj.desc,"cat":prodobj.cat}).then(()=>{
+      axios.post("http://localhost:5555/addcart",{"uid":obj.state._id,"pid":prodobj._id,"pimg":prodobj.pimg,"price":prodobj.price,"name":prodobj.name,"qty":1,"desc":prodobj.desc,"cat":prodobj.cat},{headers:{Authorization:user.token}}).then(()=>{
         navigate("/cart")
       })
     }
@@ -66,11 +75,11 @@ const Home = () => {
   return (
     <div className='cardcon'>
       {
-        shprod.map((pobj)=>{
+        prod.map((pobj)=>{
           return ( <div className='card' key={pobj._id}> {/* Added key here bcoz when rendering a list of elements in React, each child must have a unique key prop. */}
           <Card sx={{ maxWidth: 320, boxShadow: '12px 12px 15px rgba(0, 0, 0, 0.4)' }}>
           <CardMedia onClick={()=>knowmore(pobj)}
-            sx={{ height: 290,width: 288, margin:2,border:1, cursor:'pointer','&:hover':{opacity:0.8}}}
+            sx={{ width: 'auto', height: 'auto',margin:2,border:1, aspectRatio: '1 / 1', cursor: 'pointer', '&:hover': { opacity: 0.8 }, objectFit: 'cover', }}
             image={`http://localhost:5555/pimgs/${pobj.pimg}`}
           />
           <CardContent>
