@@ -1,10 +1,26 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import {useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import Ct from './Cs';
 
 const Add = () => {
   let navigate = useNavigate()
   let[data,udata]=useState({"name":"","cat":"","desc":"","price":"","pimg":""})
+  let user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+  let obj = useContext(Ct)
+
+  useEffect(()=>{
+    if(!user){
+      navigate('/login')
+    }
+    else{
+      obj.upd(user)
+    }
+  },[])
+
   let fun=(e)=>{
     udata({...data,[e.target.name]:e.target.value})
   }
@@ -17,8 +33,10 @@ const Add = () => {
       for(let i in data){
         fd.append(i, data[i])
       }
-      axios.post("http://localhost:5555/addprod",fd).then((res)=>{
+      axios.post("http://localhost:5555/addprod",fd,{headers:{Authorization:user.token}}).then((res)=>{
         navigate("/")
+      }).catch((res)=>{
+        alert(res.data.message)
       })
     }
     else{

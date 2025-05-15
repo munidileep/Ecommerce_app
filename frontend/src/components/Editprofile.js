@@ -2,24 +2,34 @@ import axios from 'axios'
 import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Ct from './Cs'
+import Cookies from 'js-cookie';
+
 
 const Editprofile = () => {
     let navigate = useNavigate()
     let obj = useContext(Ct)
     let [fdata, udata] = useState({ "_id": "", "name": "", "phno": "", "gen": "", "address": "" })
+    let user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
     
     let fun = (e) => {
         udata({ ...fdata, [e.target.name]: e.target.value })
     }
 
     useEffect(() => {
-        udata({"_id":obj.state._id,"name":obj.state.name,"gen":obj.state.gen,"address":obj.state.address,"phno":obj.state.phno})
+      if(user){
+        obj.upd(user)
+        udata({"_id":user._id,"name":user.name,"gen":user.gen,"address":user.address,"phno":user.phno})
+      }
+      else{
+        navigate("/login")
+      }
     }, [])
 
     let edit = () => {
         if (fdata.name !== "" && fdata._id !== "" && fdata.address !== "" && fdata.phno !== "" && fdata.gen !== "") {
-            axios.put("http://localhost:5555/editprofile", fdata).then(() => {
+            axios.put("http://localhost:5555/editprofile", fdata,{headers:{Authorization:user.token}}).then(() => {
                 obj.upd(fdata);
+                Cookies.set('user', JSON.stringify(fdata));
                 navigate("/")
             })
         }
@@ -40,7 +50,7 @@ const Editprofile = () => {
             <label className="label" for="input">Enter name</label>
           </div>
           <div className="input-field">
-            <select name='gen' value={fdata.gen} onChange={fun} className='input'>
+            <select name='gen' value={fdata.gen} onChange={fun} className='inputgen'>
               <option value="" disabled>-- Select Gender --</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
