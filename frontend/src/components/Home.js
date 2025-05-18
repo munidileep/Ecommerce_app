@@ -22,54 +22,55 @@ const Home = () => {
     fetchprod();
   },[])
 
-  let fetchprod = ()=>{
-    axios.get("http://localhost:5555/products").then((res)=>{
-      uprod((res.data).sort(() => Math.random() - 0.5))
-    })
+  function fetchprod() {
+    axios.get("http://localhost:5555/products").then((res) => {
+      uprod((res.data).sort(() => Math.random() - 0.5));
+    });
   }
 
-  let knowmore=(prodobj)=>{
-    if(user){
-    // obj.upd({"proddet":prodobj})
-    sessionStorage.setItem("proddet",JSON.stringify(prodobj)) // saved in the session storage bcoz for reloading
-    navigate("/Km")
+  function knowmore(prodobj) {
+    if (user) {
+      // obj.upd({"proddet":prodobj})
+      sessionStorage.setItem("proddet", JSON.stringify(prodobj)); // saved in the session storage bcoz for reloading
+      navigate("/Km");
     }
-    else{
-      navigate("/login")
+    else {
+      navigate("/login");
     }
   }
 
-  let addcart = (prodobj)=>{
-    if(obj.state.token !==""){
-      axios.post("http://localhost:5555/addcart",{"uid":obj.state._id,"pid":prodobj._id,"pimg":prodobj.pimg,"price":prodobj.price,"name":prodobj.name,"qty":1,"desc":prodobj.desc,"cat":prodobj.cat},{headers:{Authorization:user.token}}).then(()=>{
-        navigate("/cart")
-      })
+  function addcart(prodobj) {
+    if (obj.state.token !== "") {
+      axios.post("http://localhost:5555/addcart", { "uid": obj.state._id, "pid": prodobj._id, "pimg": prodobj.pimg, "price": prodobj.price, "name": prodobj.name, "qty": 1, "desc": prodobj.desc, "cat": prodobj.cat }, { headers: { Authorization: user.token } }).then(() => {
+        navigate("/cart");
+      });
     }
-    else{
+    else {
       localStorage.setItem("pendingCartItem", JSON.stringify(prodobj));
-      navigate("/login")
+      navigate("/login");
     }
   }
 
-  let del = (delobj)=>{
-    console.log(delobj)
-    axios.delete(`http://localhost:5555/delprod/${delobj._id}`).then((res)=>{
-      fetchprod()
-    })
+  function del(delobj) {
+    console.log(delobj);
+    axios.delete(`http://localhost:5555/delprod/${delobj._id}`).then((res) => {
+      fetchprod();
+    });
   }
 
-  let buynow = (buyprod)=>{
-    if(obj.state.token !==""){
-      navigate("/buynow")
+  function buynow(buyprod) {
+    if (obj.state.token !== "") {
+      navigate("/buynow");
     }
-    else{
-      navigate("/login")
+    else {
+      navigate("/login");
     }
   }
 
-  let edit = (editobj)=>{
-    obj.upd({"proddet":editobj})
-    navigate("/edit")
+  function edit(editobj) {
+    obj.upd({ "proddet": editobj });
+    sessionStorage.setItem("editprod", JSON.stringify(editobj));
+    navigate("/edit");
   }
 
   return (
@@ -79,7 +80,7 @@ const Home = () => {
           return ( <div className='card' key={pobj._id}> {/* Added key here bcoz when rendering a list of elements in React, each child must have a unique key prop. */}
           <Card sx={{ maxWidth: 320, boxShadow: '12px 12px 15px rgba(0, 0, 0, 0.4)' }}>
           <CardMedia onClick={()=>knowmore(pobj)}
-            sx={{ width: 'auto', height: 'auto',margin:2,border:1, aspectRatio: '1 / 1', cursor: 'pointer', '&:hover': { opacity: 0.8 }, objectFit: 'cover', }}
+            sx={{ width: 'auto', height: 'auto',margin:2,border:1, aspectRatio: '1 / 1', cursor: 'pointer', '&:hover': { opacity: 0.8 }, objectFit: 'cover' }}
             image={`http://localhost:5555/pimgs/${pobj.pimg}`}
           />
           <CardContent>

@@ -12,11 +12,11 @@ const Profile = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!user) {
-            navigate('/login')
+        if (user) {
+            obj.upd(user)
         }
         else {
-            obj.upd(user)
+            navigate('/login')
         }
     }, [])
 
@@ -24,7 +24,7 @@ const Profile = () => {
         <div className='editcon'>
             <div className='profile-card'>
                 <div className='profile-image'>
-                    <Avatar sx={{ bgcolor: orange[900], width: 90, height: 90, fontSize: 55, fontWeight: "bold" }}>{user.name[0].toUpperCase()}</Avatar>
+                    <Avatar sx={{ bgcolor: orange[900], width: 90, height: 90, fontSize: 55, fontWeight: "bold" }}>{user? user.name[0].toUpperCase():""}</Avatar>
                     <p>{obj.state.name}</p>
                 </div>
                 <div className='profile-details'>

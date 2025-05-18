@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext,useEffect,useState } from 'react'
 import {Link} from 'react-router-dom'
 import "../App.css"
 import Ct from './Cs'
@@ -10,10 +10,11 @@ import Cookies from 'js-cookie';
 const Nav = () => {
   let obj = useContext(Ct)
   const [anchorEl, setAnchorEl] = useState(null);
-  let [forsearch,updsearch]=useState("")
+  let [forsearch,updsearch]=useState([])
   const open = Boolean(anchorEl);
   let navigate=useNavigate()
   let cart_length = Cookies.get('cartlength') ? Cookies.get('cartlength') : 0;
+  let refresh_prod = JSON.parse(sessionStorage.getItem("searchprod"));
 
   const menuopen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,21 +40,34 @@ const Nav = () => {
   }
 
   const handleSearch = (e) => {
-    updsearch(e.target.value);
+    if(e.target.value!==""){
+      updsearch(e.target.value);
+      sessionStorage.setItem("searchprod", JSON.stringify(e.target.value))
+    }
+    else{
+      updsearch([])
+    }
   };
   
   const handleSubmitSearch = (e) => {
     e.preventDefault();
-    obj.upd({ "searchd": forsearch});
+    obj.upd({"searchd": forsearch});
+    updsearch([])
     navigate("/search");
   };
+
+  useEffect(()=>{
+    if(refresh_prod){
+      updsearch(refresh_prod)
+    }
+  },[])
 
   return (
     <div className='navbar'>
         <h1><i className="fa-brands fa-shopify"></i>  Blueshop</h1>
         <div className="search-container">
           <i className="fa-solid fa-magnifying-glass search-icon"></i>
-          <input className="searchbar" name="text" autoComplete="off" placeholder="Search..." type="text" value={forsearch} onChange={handleSearch}/>
+          <input className="searchbar" name="text" placeholder="Search..." type="text" value={forsearch} onChange={handleSearch}/>
           <button onClick={handleSubmitSearch} className='searchbutton'>Search</button>
         </div>
         <Link className='navanchor' to="/">Products <i className="fa-solid fa-shop"></i></Link>

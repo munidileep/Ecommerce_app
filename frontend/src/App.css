@@ -4,6 +4,27 @@
   outline: 0px;
 }
 
+.cardcon{
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation: showPage 0.8s ease-out 0.6s forwards; 
+}
+
+@keyframes showPage {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .navbar {
   height: 10vh;
   width: auto;
@@ -118,30 +139,28 @@ textarea {
   box-sizing: border-box;
 }
 
-
-.km {
-  width: 100%;
-  height: auto;
+.knowmore-container {
   display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  background: #ffffff;
-  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .kimg {
-  position: static;
-  width: 40%;
-  height: 81.3vh;
+  float: left;
+  min-width: 45%;
+  width: auto;
+  height: 90vh;
   padding: 30px;
   border: 2px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
   background: linear-gradient(135deg, #ffffff, #7c9eb0);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-
 }
+
 
 .kimg img {
   width: 100%;
@@ -150,18 +169,19 @@ textarea {
 }
 
 .kdet {
-  position: relative;
-  width: 60%;
-  height: 81.3vh;
+  min-width: 55%;
+  width: auto;
+  float: right;
+  height: 90vh;
   border: 2px solid #ccc;
   padding: 30px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   background: linear-gradient(135deg, #ffffff, #7c9eb0);
-  gap: 20px;
+  gap: 25.4px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  box-sizing: border-box;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -186,16 +206,8 @@ span {
   color: #662a09;
 }
 
-.details span {
-  font-family: "century Gothic", "lato", "sans-serif";
-  font-size: 19px;
-  line-height: 1.5rem;
-  letter-spacing: 0.05rem;
-}
-
 .kdet .offers {
-  width: 94%;
-  overflow: hidden;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -225,23 +237,6 @@ span {
 
 .kdet .offers p i {
   color: #fff200;
-}
-
-.kdet .offers span {
-  color: #fff;
-  font-family: "century Gothic", "lato", "sans-serif";
-  font-weight: bold;
-  display: flex;
-  justify-content: right;
-  position: relative;
-  bottom: 27px;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.kdet .offers span:hover {
-  color: #2ebdff;
 }
 
 .cardcon2 {
@@ -489,7 +484,7 @@ span {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   padding: 25px;
   border-radius: 8px;
 }
@@ -511,7 +506,10 @@ span {
   width: 90%;
   outline: none;
   border-radius: 8px;
-  height: auto;
+  font-size: 1rem;
+  font-family: "century Gothic", "lato", "sans-serif";
+  letter-spacing: 0.1rem;
+  height: 25px;
   border: 1.5px solid #ecedec;
   background: transparent;
 }
@@ -521,17 +519,26 @@ span {
   width: 96%;
   outline: none;
   border-radius: 8px;
-  height: 37px;
+  height: 45px;
   border: 1.5px solid #ecedec;
   background: transparent;
+  font-size: 1rem;
+  font-family: "century Gothic", "lato", "sans-serif";
+  letter-spacing: 0.1rem;
 }
+
 .inputgen:focus {
   border: 1.5px solid #2d79f3;
 }
-.inputgen option{
-  color: #000;
+
+.inputgen option {
   text-align: center;
+  font-size: 1rem;
+  font-family: "century Gothic", "lato", "sans-serif";
+  letter-spacing: 0.1rem;
+  padding: 8px;
 }
+
 .input:focus {
   border: 1.5px solid #2d79f3;
 }
@@ -694,7 +701,7 @@ span {
 .forgot {
   font-weight: bold;
   color: #056a8e;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-family: "century Gothic", "lato", "sans-serif";
   letter-spacing: 0.05rem;
 }
@@ -760,6 +767,12 @@ span {
   align-items: center;
   gap: 8px;
   color: #444;
+}
+
+.details-valuesb {
+  font-family: "century Gothic", "lato", "sans-serif";
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
 }
 
 hr {
@@ -845,6 +858,64 @@ hr {
   .details-values {
     font-size: 1rem;
   }
+  .knowmore-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .kdet .offers {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .kimg,
+  .kdet {
+    object-fit: contain;
+  }
+
+  .kimg {
+    padding: 20px;
+  }
+
+  .kdet {
+    padding: 20px;
+  }
+
+  .kdet .offers {
+  width: 94%;
+  background: linear-gradient(135deg, #0f2b3f, #16b8d1);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  box-sizing: border-box;
+  display: block; /* 💡 ensure block layout */
+}
+.kdet .offers h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px #b34040;
+}
+.kdet .offers p i {
+  color: #fff200;
+  margin-right: 8px;
+}
+
+  .kdet .offers p {
+    font-size: 1rem;
+    text-align: justify;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    width: 100%;
+  }
+  .btndiv {
+    width: 40%;
+  }
 
 }
 
@@ -862,15 +933,10 @@ hr {
     padding: 8px 0;
   }
 
-  .kimg {
-    height: 40vh;
-    padding: 10px;
-  }
-
   .kimg img {
+    width: 60%;
+    height: 60%;
     object-fit: contain;
-    height: 100%;
-    width: 100%;
   }
 
   .kdet {
@@ -992,6 +1058,45 @@ hr {
   .details-values {
     font-size: 1rem;
   }
+
+  .knowmore-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .kimg,
+  .kdet {
+    width: 100%;
+    height: auto;
+  }
+
+  .kimg {
+    padding: 20px;
+  }
+
+  .kdet {
+    padding: 20px;
+  }
+
+  .btndiv {
+    width: 100%;
+  }
+
+  .kdet .offers p {
+    font-size: 1rem;
+    text-align: left;
+    /* usually better for paragraphs than center */
+    box-sizing: border-box;
+    word-wrap: break-word;
+    /* ensures words break if needed */
+    overflow-wrap: break-word;
+    /* newer CSS, works on all browsers */
+    white-space: normal;
+    /* ensures text can wrap */
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1021,30 +1126,14 @@ hr {
     line-height: 18px;
   }
 
-  .kimg {
-    height: 35vh;
-  }
-
-  .details .prodkey {
-    font-size: 18px;
-  }
-
-  .details span {
+  /* .kdet .offers p {
     font-size: 14px;
-  }
+  } */
 
-  .kdet .offers h3 {
-    font-size: 18px;
-  }
-
-  .kdet .offers p {
-    font-size: 14px;
-  }
-
-  .kdet .offers span {
+  /* .kdet .offers span {
     bottom: 10px;
     font-size: 14px;
-  }
+  } */
 
   .searchbar {
     min-height: 30px;
@@ -1114,5 +1203,66 @@ hr {
     font-size: 0.85rem;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .knowmore-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .kdet .offers {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .kimg,
+  .kdet {
+    width: 100%;
+    height: auto;
+  }
+
+  .kimg {
+    padding: 20px;
+  }
+
+  .kdet {
+    padding: 20px;
+  }
+
+  .btndiv {
+    width: 100%;
+  }
+
+  .kdet .offers {
+  width: 94%;
+  background: linear-gradient(135deg, #0f2b3f, #16b8d1);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  box-sizing: border-box;
+  display: block; /* 💡 ensure block layout */
+}
+.kdet .offers h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px #b34040;
+}
+.kdet .offers p i {
+  color: #fff200;
+  margin-right: 8px;
+}
+
+  .kdet .offers p {
+    font-size: 1rem;
+    text-align: justify;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    width: 100%;
   }
 }

@@ -19,23 +19,32 @@ const Cart = () => {
   const userData = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
   useEffect(() => {
-    if(userData) {
-      axios.get(`http://localhost:5555/getcart/${userData._id}`).then((res) => {
-        ucart(res.data)
-        Cookies.set("cartlength",res.data.length)
-        let s = 0
-        for (let i = 0; i < res.data.length; i++) {
-          s = s + res.data[i].qty * res.data[i].price
-        }
-        utotal(s)
-        obj.upd(userData)
-      })
+    try {
+      if (userData) {
+        axios.get(`http://localhost:5555/getcart/${userData._id}`, {
+          headers: { Authorization: userData._id },
+        }).then((res) => {
+          ucart(res.data);
+          Cookies.set("cartlength", res.data.length);
+          let s = 0;
+          for (let i = 0; i < res.data.length; i++) {
+            s = s + res.data[i].qty * res.data[i].price;
+          }
+          utotal(s);
+          obj.upd(userData);
+        }).catch((error) => {
+          console.error("Error fetching cart data:", error);
+        });
+      } else {
+        navigate("/login");
+        return;
+      }
+    } catch (error) {
+      console.error("Unexpected error occurred:", error);
+      navigate("/login");
     }
-    else {
-      navigate("/login")
-      return;
-    }
-  }, [f,navigate])
+
+  }, [f, navigate])
 
   let knowmore = (prodobj) => {
     let productDetails = { ...prodobj, _id: prodobj.pid };  // Ensure we keep original product ID

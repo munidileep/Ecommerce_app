@@ -14,9 +14,9 @@ router.get("/inc/:cid", inc)
 router.get("/dec/:cid", dec)
 router.delete("/delcart/:cid", delcart)
 router.delete("/delprod/:id", delprod)
-router.get("/search/:sid?", search) // if u add ? means sid is optional and it is a query parameter
-router.put("/edit", edit)
-router.put("/editimg", upload.single("pimg"), editimg)
+router.get("/search/:sid?",auth, search) // if u add ? means sid is optional and it is a query parameter
+router.put("/edit",auth, edit)
+router.put("/editimg",auth, upload.single("pimg"), editimg)
 router.put("/editprofile",auth,editprofile)
 router.put("/forgotpass",forgotpass)
 router.post('/sendotp', sendOtp)

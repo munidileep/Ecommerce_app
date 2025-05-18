@@ -1,5 +1,9 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { useContext } from 'react';
+import Ct from './Cs';
 
 const Buynow = () => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -16,10 +20,21 @@ const Buynow = () => {
     let id = Math.random().toString(36).substring(2, 10 + 2).toUpperCase();
 
     let navigate = useNavigate()
+    let user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
+    let obj = useContext(Ct)
 
     let shop = ()=>{
       navigate("/")
     }
+
+    useEffect(()=>{
+      if(user){
+          obj.upd(user)
+      }
+      else{
+        navigate("/login")
+      }
+    },[])
 
   return (
     <div className='ordcon'>
