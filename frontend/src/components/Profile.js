@@ -28,10 +28,10 @@ const Profile = () => {
                     <p>{obj.state.name}</p>
                 </div>
                 <div className='profile-details'>
-                    <div className='details-values'> <i class="fa-solid fa-envelope"></i> Mail : {obj.state._id}</div><hr></hr>
-                    <div className='details-values'> <i class="fa-solid fa-phone"></i> Phno : {obj.state.phno}</div><hr></hr>
-                    <div className='details-values'> <i class="fa-solid fa-person-half-dress"></i> Gender : {obj.state.gen}</div><hr></hr>
-                    <div className='details-values'> <i class="fa-solid fa-map-location-dot"></i> Address : {obj.state.address}</div>
+                    <div className='details-values'> <i className="fa-solid fa-envelope"></i> Mail : {obj.state._id}</div><hr></hr>
+                    <div className='details-values'> <i className="fa-solid fa-phone"></i> Phno : {obj.state.phno}</div><hr></hr>
+                    <div className='details-values'> <i className="fa-solid fa-person-half-dress"></i> Gender : {obj.state.gen}</div><hr></hr>
+                    <div className='details-values'> <i className="fa-solid fa-map-location-dot"></i> Address : {obj.state.address}</div>
                 </div>
             </div>
         </div>

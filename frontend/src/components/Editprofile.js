@@ -43,11 +43,11 @@ const Editprofile = () => {
           <p className="title">Edit Profile</p>
           <div className="input-field">
             <input required="" className="input" type="text" name='_id' value={fdata._id} onChange={fun} />
-            <label className="label" for="input">Enter Email</label>
+            <label className="label" htmlFor="input">Enter Email</label>
           </div>
           <div className="input-field">
             <input required="" className="input" type='text' name='name' value={fdata.name} onChange={fun} />
-            <label className="label" for="input">Enter name</label>
+            <label className="label" htmlFor="input">Enter name</label>
           </div>
           <div className="input-field">
             <select name='gen' value={fdata.gen} onChange={fun} className='inputgen'>
@@ -56,15 +56,15 @@ const Editprofile = () => {
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
-            <label className="label" for="input">Enter Gender</label>
+            <label className="label" htmlFor="input">Enter Gender</label>
           </div>
           <div className="input-field">
             <input required="" className="input" type="text" name='phno' value={fdata.phno} onChange={fun} />
-            <label className="label" for="input">Enter phno</label>
+            <label className="label" htmlFor="input">Enter phno</label>
           </div>
           <div className="input-field">
             <textarea required="" className="input" rows={4} name='address' value={fdata.address} onChange={fun}></textarea>
-            <label className="label" for="input">Enter Address</label>
+            <label className="label" htmlFor="input">Enter Address</label>
           </div>
           <button className="submit-btn" onClick={edit}>Update</button>
           <div className='details-valuesb'>To Change Password : <Link className='forgot' to="/forgotpass"> Click here</Link></div>

@@ -26,17 +26,20 @@ const Nav = () => {
 
   function signout() {
     menuclose();
-    navigate("/logout");
+    // navigate("/logout");
+    setTimeout(() => navigate("/logouts"), 0);
   }
 
   function profile(){
     menuclose();
-    navigate("/profile")
+    // navigate("/profile")
+    setTimeout(() => navigate("/profile"), 0);
   }
 
   function edit(){
     menuclose();
-    navigate("/editprofile")
+    // navigate("/editprofile")
+    setTimeout(() => navigate("/editprofile"), 0);
   }
 
   const handleSearch = (e) => {

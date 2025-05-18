@@ -9,6 +9,7 @@ const Logout = () => {
   useEffect(()=>{
     obj.upd({"token":"","name":"","_id":"","role":""})
     Cookies.remove('user');
+    Cookies.remove("cartlength");
     sessionStorage.removeItem("proddet")
     navigate("/")
   },[])

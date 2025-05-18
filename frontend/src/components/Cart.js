@@ -81,9 +81,10 @@ const Cart = () => {
     })
   }
 
-  let buynow = (buyobjj) => {
+  let buynow = () => {
     navigate("/buynow")
   }
+
 
   return (
     <>
@@ -111,7 +112,7 @@ const Cart = () => {
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => del(pobj._id)}>Delete</Button>
-                    <Button size="small" onClick={() => buynow(pobj)}>Buy Now</Button>
+                    <Button size="small" onClick={() => buynow()}>Buy Now</Button>
                     <Button onClick={() => dec(pobj._id, pobj.qty)} size="small" style={{ fontSize: "30px" }}>-</Button>
                     <p style={{ color: "rgba(17, 118, 206, 0.8)" }}>{pobj.qty}</p>
                     <Button onClick={() => inc(pobj._id)} size="small" style={{ fontSize: "20px" }}>+</Button>
@@ -127,7 +128,7 @@ const Cart = () => {
           <div className='cart-total'>
             <i className="fas fa-shopping-bag"></i> Cart Total : {total}
           </div>
-          <button className='cart-shop'>Place Order</button>
+          <button className='cart-shop' onClick={() => buynow()}>Place Order</button>
         </div>}
     </>
   )
