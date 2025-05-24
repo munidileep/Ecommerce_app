@@ -36,5 +36,34 @@ This is the **backend** API for the Ecommerce application built with **Node.js**
 - Node.js and npm installed
 - MongoDB running locally or MongoDB Atlas cluster
 
-### 📁 Directory Structure
+### 📦 Installation
 
+- **after going to cd backend folder enter this command it automatically install all required dependencies**
+    ## npm i or npm install
+
+  
+### ▶️ Running the Application
+
+- **After installing dependencies, start the frontend:**
+  ### npm start
+
+- **API will be running at: http://localhost:5000/api manually.**
+
+### 🔄 Data Models
+
+- **User Model**
+name,email(_id),password (hashed),role (user/admin),gender,phno,address
+
+- **Product Model**
+proid(_id),name,description,price,category,image
+
+- **Cart Model**
+cartid(_id),userid,productid,name,quantity,price,imgage,description,cat
+
+uuid
+
+### 🧑‍💻 Developed By
+
+- **Munidileep**
+- **GitHub: @munidileep**
+- **Email: munidileepbasabathini2000@gmail.com**
