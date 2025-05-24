@@ -1,6 +1,6 @@
-# 🛍️ React Frontend - eCommerce Shopping Portal
+# 🛍️ React Frontend - Ecommerce Shopping Portal
 
-This is the **frontend** portion of a full-featured eCommerce application built using **React**. It includes customer-facing pages, an admin dashboard, user profile management, and dynamic interaction with a backend API.
+This is the **frontend** portion of a full-featured Ecommerce application built using **React**. It includes customer-facing pages, an admin dashboard, user profile management, and dynamic interaction with a backend API.
 
 ---
 
