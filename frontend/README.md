@@ -51,7 +51,7 @@ This is the **frontend** portion of a full-featured eCommerce application built 
 
 - **This will automatically open the app in your default browser, If it doesn't, visit http://localhost:3000 manually.**
 
-###🧑‍💻 Developed By
+### 🧑‍💻 Developed By
 Munidileep
 GitHub: @munidileep
 Email: munidileepbasabathini2000@gmail.com
