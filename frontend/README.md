@@ -49,6 +49,8 @@ This is the **frontend** portion of a full-featured eCommerce application built 
 - **After installing dependencies, start the frontend:**
   ### npm start
 
+  - Ensure the backend is running **before starting** the frontend
+
 - **This will automatically open the app in your default browser, If it doesn't, visit http://localhost:3000 manually.**
 
 ### 🧑‍💻 Developed By
