@@ -53,6 +53,6 @@ This is the **frontend** portion of a full-featured eCommerce application built 
 
 ### 🧑‍💻 Developed By
 
--**Munidileep**
--**GitHub: @munidileep**
--**Email: munidileepbasabathini2000@gmail.com**
+- **Munidileep**
+- **GitHub: @munidileep**
+- **Email: munidileepbasabathini2000@gmail.com**
